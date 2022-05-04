@@ -462,14 +462,15 @@
 
   // src/index.js
   var Mousetrap = require_mousetrap();
-  function src_default(Alpine) {
+  var src_default = (Alpine) => {
     Alpine.directive("mousetrap", (el, {modifiers, expression}, {evaluate}) => {
-      Mousetrap.bind(modifiers, () => {
+      Mousetrap.bindGlobal(modifiers, ($event) => {
+        $event.preventDefault();
         expression ? evaluate(expression) : el.click();
         return false;
       });
     });
-  }
+  };
 
   // builds/cdn.js
   document.addEventListener("alpine:initializing", () => {
