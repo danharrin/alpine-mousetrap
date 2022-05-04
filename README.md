@@ -1,6 +1,6 @@
 > ✨ Help support the maintenance of this package by [sponsoring me](https://github.com/sponsors/danharrin).
 
-# Alpine Mousetrap
+# Alpine.js Mousetrap
 
 A simple library for handling keyboard shortcuts.
 
