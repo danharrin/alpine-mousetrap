@@ -1,7 +1,7 @@
 {
     "name": "@danharrin/alpine-mousetrap",
     "description": "A simple library for handling keyboard shortcuts with Alpine.js.",
-    "version": "0.1.3",
+    "version": "0.1.4",
     "license": "MIT",
     "author": "Dan Harrin <dan@danharrin.com>",
     "repository": {

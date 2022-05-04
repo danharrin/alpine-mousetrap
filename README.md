@@ -69,6 +69,21 @@ Alternatively, you can invoke a custom function when the keyboard shortcut is hi
 </div>
 ```
 
+### Global bindings
+
+You may listen for "global" keyboard events that will work anywhere, including inside input fields:
+
+```html
+<div x-data="{}">
+    <button
+        type="button"
+        x-mousetrap.global.command+k.ctrl+k
+    >
+        Button
+    </button>
+</div>
+```
+
 ## Versioning
 
 This projects follow the [Semantic Versioning](https://semver.org/) guidelines.

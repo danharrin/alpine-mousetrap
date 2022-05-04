@@ -1,4 +1,9 @@
+var __create = Object.create;
 var __defProp = Object.defineProperty;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __markAsModule = (target) => __defProp(target, "__esModule", {value: true});
 var __commonJS = (callback, module2) => () => {
   if (!module2) {
@@ -11,10 +16,21 @@ var __export = (target, all) => {
   for (var name in all)
     __defProp(target, name, {get: all[name], enumerable: true});
 };
+var __exportStar = (target, module2, desc) => {
+  if (module2 && typeof module2 === "object" || typeof module2 === "function") {
+    for (let key of __getOwnPropNames(module2))
+      if (!__hasOwnProp.call(target, key) && key !== "default")
+        __defProp(target, key, {get: () => module2[key], enumerable: !(desc = __getOwnPropDesc(module2, key)) || desc.enumerable});
+  }
+  return target;
+};
+var __toModule = (module2) => {
+  return __exportStar(__markAsModule(__defProp(module2 != null ? __create(__getProtoOf(module2)) : {}, "default", module2 && module2.__esModule && "default" in module2 ? {get: () => module2.default, enumerable: true} : {value: module2, enumerable: true})), module2);
+};
 
 // node_modules/mousetrap/mousetrap.js
 var require_mousetrap = __commonJS((exports2, module2) => {
-  (function(window2, document2, undefined) {
+  (function(window2, document2, undefined2) {
     if (!window2) {
       return;
     }
@@ -220,11 +236,11 @@ var require_mousetrap = __commonJS((exports2, module2) => {
       }
       return _belongsTo(element.parentNode, ancestor);
     }
-    function Mousetrap2(targetElement) {
+    function Mousetrap3(targetElement) {
       var self = this;
       targetElement = targetElement || document2;
-      if (!(self instanceof Mousetrap2)) {
-        return new Mousetrap2(targetElement);
+      if (!(self instanceof Mousetrap3)) {
+        return new Mousetrap3(targetElement);
       }
       self.target = targetElement;
       self._callbacks = {};
@@ -388,31 +404,31 @@ var require_mousetrap = __commonJS((exports2, module2) => {
       _addEvent(targetElement, "keydown", _handleKeyEvent);
       _addEvent(targetElement, "keyup", _handleKeyEvent);
     }
-    Mousetrap2.prototype.bind = function(keys, callback, action) {
+    Mousetrap3.prototype.bind = function(keys, callback, action) {
       var self = this;
       keys = keys instanceof Array ? keys : [keys];
       self._bindMultiple.call(self, keys, callback, action);
       return self;
     };
-    Mousetrap2.prototype.unbind = function(keys, action) {
+    Mousetrap3.prototype.unbind = function(keys, action) {
       var self = this;
       return self.bind.call(self, keys, function() {
       }, action);
     };
-    Mousetrap2.prototype.trigger = function(keys, action) {
+    Mousetrap3.prototype.trigger = function(keys, action) {
       var self = this;
       if (self._directMap[keys + ":" + action]) {
         self._directMap[keys + ":" + action]({}, keys);
       }
       return self;
     };
-    Mousetrap2.prototype.reset = function() {
+    Mousetrap3.prototype.reset = function() {
       var self = this;
       self._callbacks = {};
       self._directMap = {};
       return self;
     };
-    Mousetrap2.prototype.stopCallback = function(e, element) {
+    Mousetrap3.prototype.stopCallback = function(e, element) {
       var self = this;
       if ((" " + element.className + " ").indexOf(" mousetrap ") > -1) {
         return false;
@@ -428,11 +444,11 @@ var require_mousetrap = __commonJS((exports2, module2) => {
       }
       return element.tagName == "INPUT" || element.tagName == "SELECT" || element.tagName == "TEXTAREA" || element.isContentEditable;
     };
-    Mousetrap2.prototype.handleKey = function() {
+    Mousetrap3.prototype.handleKey = function() {
       var self = this;
       return self._handleKey.apply(self, arguments);
     };
-    Mousetrap2.addKeycodes = function(object) {
+    Mousetrap3.addKeycodes = function(object) {
       for (var key in object) {
         if (object.hasOwnProperty(key)) {
           _MAP[key] = object[key];
@@ -440,11 +456,11 @@ var require_mousetrap = __commonJS((exports2, module2) => {
       }
       _REVERSE_MAP = null;
     };
-    Mousetrap2.init = function() {
-      var documentMousetrap = Mousetrap2(document2);
+    Mousetrap3.init = function() {
+      var documentMousetrap = Mousetrap3(document2);
       for (var method in documentMousetrap) {
         if (method.charAt(0) !== "_") {
-          Mousetrap2[method] = function(method2) {
+          Mousetrap3[method] = function(method2) {
             return function() {
               return documentMousetrap[method2].apply(documentMousetrap, arguments);
             };
@@ -452,14 +468,14 @@ var require_mousetrap = __commonJS((exports2, module2) => {
         }
       }
     };
-    Mousetrap2.init();
-    window2.Mousetrap = Mousetrap2;
+    Mousetrap3.init();
+    window2.Mousetrap = Mousetrap3;
     if (typeof module2 !== "undefined" && module2.exports) {
-      module2.exports = Mousetrap2;
+      module2.exports = Mousetrap3;
     }
     if (typeof define === "function" && define.amd) {
       define(function() {
-        return Mousetrap2;
+        return Mousetrap3;
       });
     }
   })(typeof window !== "undefined" ? window : null, typeof window !== "undefined" ? document : null);
@@ -472,13 +488,53 @@ __export(exports, {
 });
 
 // src/index.js
-var Mousetrap = require_mousetrap();
+var import_mousetrap = __toModule(require_mousetrap());
+
+// node_modules/mousetrap/plugins/global-bind/mousetrap-global-bind.js
+(function(Mousetrap3) {
+  if (!Mousetrap3) {
+    return;
+  }
+  var _globalCallbacks = {};
+  var _originalStopCallback = Mousetrap3.prototype.stopCallback;
+  Mousetrap3.prototype.stopCallback = function(e, element, combo, sequence) {
+    var self = this;
+    if (self.paused) {
+      return true;
+    }
+    if (_globalCallbacks[combo] || _globalCallbacks[sequence]) {
+      return false;
+    }
+    return _originalStopCallback.call(self, e, element, combo);
+  };
+  Mousetrap3.prototype.bindGlobal = function(keys, callback, action) {
+    var self = this;
+    self.bind(keys, callback, action);
+    if (keys instanceof Array) {
+      for (var i = 0; i < keys.length; i++) {
+        _globalCallbacks[keys[i]] = true;
+      }
+      return;
+    }
+    _globalCallbacks[keys] = true;
+  };
+  Mousetrap3.init();
+})(typeof Mousetrap !== "undefined" ? Mousetrap : void 0);
+
+// src/index.js
 var src_default = (Alpine) => {
   Alpine.directive("mousetrap", (el, {modifiers, expression}, {evaluate}) => {
-    Mousetrap.bindGlobal(modifiers, ($event) => {
+    const action = () => expression ? evaluate(expression) : el.click();
+    if (modifiers.includes("global")) {
+      modifiers = modifiers.filter((modifier) => modifier !== "global");
+      import_mousetrap.default.bindGlobal(modifiers, ($event) => {
+        $event.preventDefault();
+        action();
+      });
+    }
+    import_mousetrap.default.bind(modifiers, ($event) => {
       $event.preventDefault();
-      expression ? evaluate(expression) : el.click();
-      return false;
+      action();
     });
   });
 };

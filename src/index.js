@@ -1,13 +1,24 @@
-const Mousetrap = require('mousetrap')
+import Mousetrap from 'mousetrap'
+import 'mousetrap/plugins/global-bind/mousetrap-global-bind'
 
 export default (Alpine) => {
     Alpine.directive('mousetrap', (el, { modifiers, expression }, { evaluate }) => {
-        Mousetrap.bindGlobal(modifiers, ($event) => {
+        const action = () => expression ? evaluate(expression) : el.click()
+
+        if (modifiers.includes('global')) {
+            modifiers = modifiers.filter((modifier) => modifier !== 'global')
+
+            Mousetrap.bindGlobal(modifiers, ($event) => {
+                $event.preventDefault()
+
+                action()
+            })
+        }
+
+        Mousetrap.bind(modifiers, ($event) => {
             $event.preventDefault()
 
-            expression ? evaluate(expression) : el.click()
-
-            return false
+            action()
         })
     })
 }
