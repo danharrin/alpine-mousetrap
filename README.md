@@ -5,7 +5,6 @@
 A simple library for handling keyboard shortcuts with Alpine.js.
 
 ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/danharrin/alpine-mousetrap?label=version&style=flat-square)
-![Build size Brotli](https://img.badgesize.io/danharrin/alpine-mousetrap/master/dist/alpine-mousetrap.js.svg?compression=gzip&style=flat-square&color=green)
 [![Monthly downloads via CDN](https://data.jsdelivr.com/v1/package/npm/@danharrin/alpine-mousetrap/badge)](https://www.jsdelivr.com/package/npm/@danharrin/alpine-mousetrap)
 
 ## About
