@@ -2,7 +2,7 @@
 
 # Alpine.js Mousetrap
 
-A simple library for handling keyboard shortcuts.
+A simple library for handling keyboard shortcuts with Alpine.js.
 
 ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/danharrin/alpine-mousetrap?label=version&style=flat-square)
 ![Build size Brotli](https://img.badgesize.io/danharrin/alpine-mousetrap/master/dist/alpine-mousetrap.js.svg?compression=gzip&style=flat-square&color=green)
