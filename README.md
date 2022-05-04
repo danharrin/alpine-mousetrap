@@ -55,9 +55,9 @@ To register keyboard shortcuts for a button or other clickable element:
 </div>
 ```
 
-The list of keyboard shortcuts should be written as per [Mousetrap](https://github.com/ccampbell/mousetrap)'s documentation, each separated by a period `.`.
+Check out the original [Mousetrap](https://github.com/ccampbell/mousetrap) documentation for more shortcut examples. If you're registering more than one, separate them with a period.
 
-Alternatively, you can invoke a custom function when the keyboard shortcut is made:
+Alternatively, you can invoke a custom function when the keyboard shortcut is hit:
 
 ```html
 <div x-data="{}">
