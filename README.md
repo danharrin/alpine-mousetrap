@@ -47,14 +47,16 @@ To register keyboard shortcuts for a button or other clickable element:
 <div x-data="{}">
     <button
         type="button"
-        x-mousetrap.command+k.ctrl+k
+        x-mousetrap.command-k.ctrl-k
     >
         Button
     </button>
 </div>
 ```
 
-Check out the original [Mousetrap](https://github.com/ccampbell/mousetrap) documentation for more shortcut examples. If you're registering more than one, separate them with a period.
+Check out the original [Mousetrap](https://github.com/ccampbell/mousetrap) documentation for more shortcut examples.
+
+If the shortcut uses a `+`, replace it with a `-`. If you're registering more than one shortcut, separate them with a period.
 
 Alternatively, you can invoke a custom function when the keyboard shortcut is hit:
 
@@ -62,7 +64,7 @@ Alternatively, you can invoke a custom function when the keyboard shortcut is hi
 <div x-data="{}">
     <button
         type="button"
-        x-mousetrap.command+k.ctrl+k="console.log('command k or control k')"
+        x-mousetrap.command-k.ctrl-k="console.log('command k or control k')"
     >
         Button
     </button>
@@ -77,7 +79,7 @@ You may listen for "global" keyboard events that will work anywhere, including i
 <div x-data="{}">
     <button
         type="button"
-        x-mousetrap.global.command+k.ctrl+k
+        x-mousetrap.global.command-k.ctrl-k
     >
         Button
     </button>
