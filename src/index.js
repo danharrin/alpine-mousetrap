@@ -7,7 +7,8 @@ export default (Alpine) => {
 
         modifiers = modifiers.map((modifier) => modifier
             .replace(/--/g, ' ')
-            .replace(/-/g, '+'))
+            .replace(/-/g, '+')
+            .replace(/\bslash\b/g, '/'))
 
         if (modifiers.includes('global')) {
             modifiers = modifiers.filter((modifier) => modifier !== 'global')
