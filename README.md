@@ -86,6 +86,21 @@ You may listen for "global" keyboard events that will work anywhere, including i
 </div>
 ```
 
+### Slash (/)
+
+You may listen for "/" keypress events using the keyword "slash":
+
+```html
+<div x-data="{}">
+    <button
+        type="button"
+        x-mousetrap.global.slash
+    >
+        Button
+    </button>
+</div>
+```
+
 ## Versioning
 
 This projects follow the [Semantic Versioning](https://semver.org/) guidelines.
