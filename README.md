@@ -56,7 +56,7 @@ To register keyboard shortcuts for a button or other clickable element:
 
 Check out the original [Mousetrap](https://github.com/ccampbell/mousetrap) documentation for more shortcut examples.
 
-If the shortcut uses a `+`, replace it with a `-`. If you're registering more than one shortcut, separate them with a period.
+If the shortcut uses a `+`, replace it with a `-`. If the shortcut is a sequence, replace the space with `--`. If you're registering more than one shortcut, separate them with a period.
 
 Alternatively, you can invoke a custom function when the keyboard shortcut is hit:
 
