@@ -528,6 +528,9 @@
         $event.preventDefault();
         action();
       });
+      document.addEventListener("livewire:navigating", () => {
+        import_mousetrap.default.unbind(modifiers);
+      }, {once: true});
     });
   };
 
