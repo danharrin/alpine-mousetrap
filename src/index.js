@@ -26,13 +26,12 @@ export default (Alpine) => {
             action()
         })
 
-        // Clean up Livewire navigate bindings when navigating away
         document.addEventListener(
             'livewire:navigating',
             () => {
                 Mousetrap.unbind(modifiers)
             },
-            { once: true }
-        )        
+            { once: true },
+        )
     })
 }
