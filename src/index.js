@@ -14,6 +14,11 @@ export default (Alpine) => {
             modifiers = modifiers.filter((modifier) => modifier !== 'global')
 
             Mousetrap.bindGlobal(modifiers, ($event) => {
+                const filamentModal = document.querySelector('.fi-modal-open')
+                if (filamentModal && !filamentModal.contains(el)) {
+                    return
+                }
+                
                 $event.preventDefault()
 
                 action()
@@ -21,6 +26,11 @@ export default (Alpine) => {
         }
 
         Mousetrap.bind(modifiers, ($event) => {
+            const filamentModal = document.querySelector('.fi-modal-open')
+            if (filamentModal && !filamentModal.contains(el)) {
+                return
+            }
+            
             $event.preventDefault()
 
             action()

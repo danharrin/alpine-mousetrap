@@ -519,11 +519,19 @@ var src_default = (Alpine) => {
     if (modifiers.includes("global")) {
       modifiers = modifiers.filter((modifier) => modifier !== "global");
       import_mousetrap.default.bindGlobal(modifiers, ($event) => {
+        const filamentModal = document.querySelector(".fi-modal-open");
+        if (filamentModal && !filamentModal.contains(el)) {
+          return;
+        }
         $event.preventDefault();
         action();
       });
     }
     import_mousetrap.default.bind(modifiers, ($event) => {
+      const filamentModal = document.querySelector(".fi-modal-open");
+      if (filamentModal && !filamentModal.contains(el)) {
+        return;
+      }
       $event.preventDefault();
       action();
     });
