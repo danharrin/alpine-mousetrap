@@ -513,6 +513,7 @@
   })(typeof Mousetrap !== "undefined" ? Mousetrap : void 0);
 
   // src/index.js
+  var getOpenModal = () => Array.from(document.querySelectorAll('[aria-modal="true"]')).find((modal) => window.getComputedStyle(modal).display !== "none");
   var src_default = (Alpine) => {
     Alpine.directive("mousetrap", (el, {modifiers, expression}, {evaluate}) => {
       const action = () => expression ? evaluate(expression) : el.click();
@@ -520,11 +521,19 @@
       if (modifiers.includes("global")) {
         modifiers = modifiers.filter((modifier) => modifier !== "global");
         import_mousetrap.default.bindGlobal(modifiers, ($event) => {
+          const openModal = getOpenModal();
+          if (openModal && !openModal.contains(el)) {
+            return;
+          }
           $event.preventDefault();
           action();
         });
       }
       import_mousetrap.default.bind(modifiers, ($event) => {
+        const openModal = getOpenModal();
+        if (openModal && !openModal.contains(el)) {
+          return;
+        }
         $event.preventDefault();
         action();
       });

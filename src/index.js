@@ -1,6 +1,10 @@
 import Mousetrap from 'mousetrap'
 import 'mousetrap/plugins/global-bind/mousetrap-global-bind'
 
+const getOpenModal = () => Array.from(
+    document.querySelectorAll('[aria-modal="true"]')
+).find(modal => window.getComputedStyle(modal).display !== 'none')
+
 export default (Alpine) => {
     Alpine.directive('mousetrap', (el, { modifiers, expression }, { evaluate }) => {
         const action = () => expression ? evaluate(expression) : el.click()
@@ -14,6 +18,11 @@ export default (Alpine) => {
             modifiers = modifiers.filter((modifier) => modifier !== 'global')
 
             Mousetrap.bindGlobal(modifiers, ($event) => {
+                const openModal = getOpenModal()
+                if (openModal && !openModal.contains(el)) {
+                    return
+                }
+
                 $event.preventDefault()
 
                 action()
@@ -21,6 +30,11 @@ export default (Alpine) => {
         }
 
         Mousetrap.bind(modifiers, ($event) => {
+            const openModal = getOpenModal()
+            if (openModal && !openModal.contains(el)) {
+                return
+            }
+
             $event.preventDefault()
 
             action()
