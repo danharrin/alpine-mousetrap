@@ -512,6 +512,7 @@ var import_mousetrap = __toModule(require_mousetrap());
 })(typeof Mousetrap !== "undefined" ? Mousetrap : void 0);
 
 // src/index.js
+var getOpenModal = () => Array.from(document.querySelectorAll('[aria-modal="true"]')).find((modal) => window.getComputedStyle(modal).display !== "none");
 var src_default = (Alpine) => {
   Alpine.directive("mousetrap", (el, {modifiers, expression}, {evaluate}) => {
     const action = () => expression ? evaluate(expression) : el.click();
@@ -519,8 +520,8 @@ var src_default = (Alpine) => {
     if (modifiers.includes("global")) {
       modifiers = modifiers.filter((modifier) => modifier !== "global");
       import_mousetrap.default.bindGlobal(modifiers, ($event) => {
-        const filamentModal = document.querySelector(".fi-modal-open");
-        if (filamentModal && !filamentModal.contains(el)) {
+        const openModal = getOpenModal();
+        if (openModal && !openModal.contains(el)) {
           return;
         }
         $event.preventDefault();
@@ -528,8 +529,8 @@ var src_default = (Alpine) => {
       });
     }
     import_mousetrap.default.bind(modifiers, ($event) => {
-      const filamentModal = document.querySelector(".fi-modal-open");
-      if (filamentModal && !filamentModal.contains(el)) {
+      const openModal = getOpenModal();
+      if (openModal && !openModal.contains(el)) {
         return;
       }
       $event.preventDefault();
