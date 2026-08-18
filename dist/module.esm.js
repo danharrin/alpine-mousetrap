@@ -514,7 +514,7 @@ var import_mousetrap = __toModule(require_mousetrap());
 // src/index.js
 var getOpenModal = () => Array.from(document.querySelectorAll('[aria-modal="true"]')).find((modal) => window.getComputedStyle(modal).display !== "none");
 var src_default = (Alpine) => {
-  Alpine.directive("mousetrap", (el, {modifiers, expression}, {evaluate}) => {
+  Alpine.directive("mousetrap", (el, {modifiers, expression}, {cleanup, evaluate}) => {
     const action = () => expression ? evaluate(expression) : el.click();
     modifiers = modifiers.map((modifier) => modifier.replace(/--/g, " ").replace(/-/g, "+").replace(/\bslash\b/g, "/"));
     if (modifiers.includes("global")) {
@@ -536,9 +536,9 @@ var src_default = (Alpine) => {
       $event.preventDefault();
       action();
     });
-    document.addEventListener("livewire:navigating", () => {
+    cleanup(() => {
       import_mousetrap.default.unbind(modifiers);
-    }, {once: true});
+    });
   });
 };
 
