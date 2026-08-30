@@ -6,7 +6,7 @@ const getOpenModal = () => Array.from(
 ).find(modal => window.getComputedStyle(modal).display !== 'none')
 
 export default (Alpine) => {
-    Alpine.directive('mousetrap', (el, { modifiers, expression }, { evaluate }) => {
+    Alpine.directive('mousetrap', (el, { modifiers, expression }, { cleanup, evaluate }) => {
         const action = () => expression ? evaluate(expression) : el.click()
 
         modifiers = modifiers.map((modifier) => modifier
@@ -40,12 +40,8 @@ export default (Alpine) => {
             action()
         })
 
-        document.addEventListener(
-            'livewire:navigating',
-            () => {
-                Mousetrap.unbind(modifiers)
-            },
-            { once: true },
-        )
+        cleanup(() => {
+            Mousetrap.unbind(modifiers)
+        })
     })
 }
