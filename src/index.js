@@ -6,7 +6,7 @@ const getOpenModal = () => Array.from(
 ).find(modal => window.getComputedStyle(modal).display !== 'none')
 
 export default (Alpine) => {
-    Alpine.directive('mousetrap', (el, { modifiers, expression }, { cleanup, evaluate }) => {
+    Alpine.directive('mousetrap', Alpine.skipDuringClone((el, { modifiers, expression }, { cleanup, evaluate }) => {
         const action = () => expression ? evaluate(expression) : el.click()
 
         modifiers = modifiers.map((modifier) => modifier
@@ -43,5 +43,5 @@ export default (Alpine) => {
         cleanup(() => {
             Mousetrap.unbind(modifiers)
         })
-    })
+    }))
 }
